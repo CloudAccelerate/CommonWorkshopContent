@@ -35,12 +35,15 @@ labGuide.controller('labGuideController', ['$scope', '$http', '$mdSidenav', '$sa
                     , title: "Interactive Tour"
                 };
             }
-            
             if($scope.manifest.workshop.theme){
                 console.log("Theme selected",$scope.manifest.workshop.theme);
                 if($scope.manifest.workshop.theme == 'ttc'){
                     $scope.theme = 'ttc';
                 }
+            }
+            $scope.administration = "http://innovate.us.oracle.com:81/opcworkshops/index.html";
+            if($scope.manifest.workshop.adminpage){
+                $scope.administration = $scope.manifest.workshop.adminpage
             }
         }, function (msg) {
             console.log('Error getting manifest.json!');
@@ -146,4 +149,8 @@ labGuide.controller('labGuideController', ['$scope', '$http', '$mdSidenav', '$sa
         $scope.getLabGuide({
             filename: 'Home.md'
         });
+        $scope.openAdmin = function(){
+            console.log("Openeing Admin Console",$scope.administration);
+            window.open($scope.administration, '_blank')
+        }
     }]);
